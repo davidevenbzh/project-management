@@ -33,7 +33,7 @@ For CDK operations, `cd apps/backend-auth-service` then use `pnpm cdk synth|diff
 
 - **TypeScript strict mode** everywhere — `noUncheckedIndexedAccess: true`, no implicit any.
 - **TypeScript** — use TypeScript for all code, including CDK infrastructure. No JavaScript files, and also use best pratice of TS 5+.
-- **Node** — target Node.js 22+ all code (backend and CDK), use ES2022 features, and module resolution "NodeNext" for better ESM support. Avoid legacy CommonJS patterns.
+- **Node** — target Node.js 22+ all code (backend and CDK), use ES2022 features, and module resolution "NodeNext" for better ESM support. Avoid legacy CommonJS patterns. Prefer `import`/`export` syntax and top-level await where appropriate. Prefer arrow functions and modern JS features for cleaner code.
 - **ESLint flat config** — configs live in `packages/eslint-config/`. All lint violations are warnings (`eslint-plugin-only-warn`); `--max-warnings 0` is enforced in CI/frontend.
 - **Config inheritance** — TypeScript and ESLint configs follow explicit inheritance chains to avoid duplication. See section below.
 - **Shared configs** — extend `@repo/typescript-config` and `@repo/eslint-config` in each app; do not duplicate compiler options.
