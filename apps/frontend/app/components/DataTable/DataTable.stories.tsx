@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, userEvent, within } from "storybook/test";
 
 import { DataTable, type DataTableRow } from "./DataTable";
 
@@ -56,6 +57,7 @@ const rows: DataTableRow[] = [
 const meta = {
   title: "Components/DataTable",
   component: DataTable,
+  tags: ['autodocs'],
   args: {
     title: "Project monitor",
     columns: [
@@ -96,16 +98,40 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // All 5 column headers render
+    await expect(canvas.getByRole("columnheader", { name: /project/i })).toBeVisible();
+    await expect(canvas.getByRole("columnheader", { name: /owner/i })).toBeVisible();
+    await expect(canvas.getByRole("columnheader", { name: /status/i })).toBeVisible();
+    // Default page size is 5 → 5 data rows + 1 header row
+    await expect(canvas.getAllByRole("row")).toHaveLength(6);
+    // First row content is visible
+    await expect(canvas.getByText("Frontend library")).toBeVisible();
+    // Click the Project column header to sort descending
+    await userEvent.click(canvas.getByRole("columnheader", { name: /project/i }));
+    await userEvent.click(canvas.getByRole("columnheader", { name: /project/i }));
+  },
+};
 
 export const Loading: Story = {
   args: {
     loading: true,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // Loading bar is present
+    await expect(canvas.getByRole("progressbar")).toBeVisible();
   },
 };
 
 export const Empty: Story = {
   args: {
     rows: [],
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText(/no records to display/i)).toBeVisible();
   },
 };

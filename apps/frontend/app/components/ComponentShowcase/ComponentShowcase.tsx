@@ -20,7 +20,7 @@ import { DateInput } from "../inputs/DateInput/DateInput";
 import { NumberInput } from "../inputs/NumberInput/NumberInput";
 import { RadioGroupField } from "../inputs/RadioGroupField/RadioGroupField";
 import { TextInput } from "../inputs/TextInput/TextInput";
-import { tableColumns, tableRows, teamOptions } from "./ComponentShowcase.data";
+import { tableColumns, tableRows, teamOptions, activityItems } from "./ComponentShowcase.data";
 
 /**
  * Displays a composed library preview used in Storybook and on the home route.

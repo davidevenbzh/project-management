@@ -1,3 +1,6 @@
+import type { AutocompleteOption } from "../inputs/AutocompleteInput/AutocompleteInput";
+import type { DataTableColumn, DataTableRow } from "../DataTable/DataTable";
+
 export const teamOptions: AutocompleteOption[] = [
   {
     label: "Platform",
@@ -68,7 +71,7 @@ export const tableColumns: DataTableColumn[] = [
     header: "Progress",
     sortable: true,
     align: "right",
-    sortAccessor: (row) => Number(row.progress ?? 0),
+    sortAccessor: (row: DataTableRow) => Number(row.progress ?? 0),
   },
   { key: "due", header: "Due", sortable: true, align: "right" },
 ];

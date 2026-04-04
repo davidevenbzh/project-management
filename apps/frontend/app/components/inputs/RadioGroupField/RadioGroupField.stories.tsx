@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, within } from "storybook/test";
 
 import { RadioGroupField } from "./RadioGroupField";
 
@@ -10,6 +11,7 @@ const meta = {
     name: "release-mode",
     helperText: "Pick the cadence that matches the current sprint objective.",
     defaultValue: "guarded",
+    tags: ['autodocs'],
     options: [
       {
         label: "Guarded",
@@ -29,7 +31,17 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const radios = canvas.getAllByRole("radio");
+    await expect(radios).toHaveLength(2);
+    // Default value "guarded" is selected
+    await expect(canvas.getByRole("radio", { name: /guarded/i })).toBeChecked();
+    await expect(canvas.getByRole("radio", { name: /fast lane/i })).not.toBeChecked();
+    await expect(canvas.getByText(/pick the cadence/i)).toBeVisible();
+  },
+};
 
 export const Inline: Story = {
   args: {
@@ -39,5 +51,13 @@ export const Inline: Story = {
       { label: "Weekly", value: "weekly" },
       { label: "Manual", value: "manual" },
     ],
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getAllByRole("radio")).toHaveLength(3);
+    // MUI hides the <input> with CSS; check the visible labels instead
+    await expect(canvas.getByText("Daily")).toBeVisible();
+    await expect(canvas.getByText("Weekly")).toBeVisible();
+    await expect(canvas.getByText("Manual")).toBeVisible();
   },
 };

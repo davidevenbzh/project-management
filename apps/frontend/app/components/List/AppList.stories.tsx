@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, within } from "storybook/test";
 
 import { AppList } from "./AppList";
 
 const meta = {
   title: "Components/List",
   component: AppList,
+  tags: ['autodocs'],
   args: {
     title: "Recent events",
     description:
@@ -37,4 +39,14 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("heading", { name: /recent events/i })).toBeVisible();
+    await expect(canvas.getByText(/schema review approved/i)).toBeVisible();
+    await expect(canvas.getByText(/three tickets reassigned/i)).toBeVisible();
+    await expect(canvas.getByText(/storybook build completed/i)).toBeVisible();
+    // Verify all 3 list items render
+    await expect(canvas.getAllByRole("listitem")).toHaveLength(3);
+  },
+};

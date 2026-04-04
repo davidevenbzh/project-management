@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, within } from "storybook/test";
 
 import { AutocompleteInput } from "./AutocompleteInput";
 
@@ -28,6 +29,7 @@ const options = [
 const meta = {
   title: "Components/Inputs/AutocompleteInput",
   component: AutocompleteInput,
+  tags: ['autodocs'],
   args: {
     label: "Assign team",
     helperText: "Search a local option set or show an async loading state.",
@@ -39,12 +41,26 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const combobox = canvas.getByRole("combobox", { name: /assign team/i });
+    await expect(combobox).toBeVisible();
+    await expect(combobox).not.toBeDisabled();
+    await expect(canvas.getByText(/search a local option set/i)).toBeVisible();
+  },
+};
 
 export const Loading: Story = {
   args: {
     loading: true,
     options: [],
     helperText: "Remote search is warming up.",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const combobox = canvas.getByRole("combobox", { name: /assign team/i });
+    await expect(combobox).toBeVisible();
+    await expect(canvas.getByText(/remote search is warming up/i)).toBeVisible();
   },
 };
