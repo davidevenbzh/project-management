@@ -1,4 +1,4 @@
-import { Welcome } from "../welcome/welcome";
+import { ComponentShowcase } from "../components/ComponentShowcase/ComponentShowcase";
 import { Route } from "./+types/home";
 
 /**
@@ -7,8 +7,8 @@ import { Route } from "./+types/home";
  */
 export const meta: Route.MetaFunction = () => {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Project Management Component Library" },
+    { name: "description", content: "MUI-backed hacker-theme component library preview." },
   ];
 }
 
@@ -17,7 +17,7 @@ export const meta: Route.MetaFunction = () => {
  * @returns {React.ReactElement} The Welcome component
  */
 const Home: React.FC = () => {
-  return <Welcome />;
+  return <ComponentShowcase />;
 }
 
 export default Home;

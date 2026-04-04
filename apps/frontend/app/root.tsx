@@ -8,6 +8,7 @@ import {
 } from "react-router";
 import "./app.css";
 import { Route } from "./+types/root";
+import { AppThemeProvider } from "./theme/AppThemeProvider";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -18,7 +19,7 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@500;700&display=swap",
   },
 ];
 
@@ -41,7 +42,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <div className="theme-root" data-theme="dark">
+      <AppThemeProvider mode="dark">
+        <div className="app-shell">
+          <Outlet />
+        </div>
+      </AppThemeProvider>
+    </div>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
@@ -61,14 +70,18 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
-    </main>
+    <div className="theme-root" data-theme="dark">
+      <AppThemeProvider mode="dark">
+        <main className="app-shell app-page">
+          <h1>{message}</h1>
+          <p>{details}</p>
+          {stack && (
+            <pre>
+              <code>{stack}</code>
+            </pre>
+          )}
+        </main>
+      </AppThemeProvider>
+    </div>
   );
 }

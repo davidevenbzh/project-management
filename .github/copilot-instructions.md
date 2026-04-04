@@ -8,7 +8,7 @@ Turborepo monorepo using **pnpm workspaces**:
 
 'apps' contains application like frontend and backend services;
 'apps/backend-*-service' contains CDK infrastructure deploy on AWS with free serverless architectecture (Lambda, DynamoDB, API Gateway);*
-'apps/frontend' is a React SPA using React Router v7 and Tailwind CSS v4 who can be deployed on AWS S3/CloudFront;
+'apps/frontend' is a React SPA using React Router v7 and mui library who can be deployed on AWS S3/CloudFront;
 'packages' contains shared configs and utilities;
 
 ## Build & Test
@@ -45,7 +45,7 @@ For CDK operations, `cd apps/backend-auth-service` then use `pnpm cdk synth|diff
 - **Barrels** — avoid index.ts barrels; they can cause circular dependencies and slow down TypeScript compilation. Import directly from source files.
 - **Documentation** — use JSDoc comments for all functions and classes, especially public APIs. Maintain a README.md in each package with usage instructions and examples.
 - **Naming conventions** — use camelCase for variables and functions, PascalCase for classes and React components, and UPPER_SNAKE_CASE for constants. Prefix private fields with an underscore (_).
-- **React** — use functional components and hooks. Avoid class components. Use `useEffect` for side effects and `useMemo`/`useCallback` for performance optimizations when necessary. Prefer composition over inheritance for component reuse. Always create a stories file for each component to document its usage and edge cases. Prefer to create a custom hook for complex logic and keep components focused on rendering.
+- **React** — use functional components and hooks. Avoid class components. Use `useEffect` for side effects and `useMemo`/`useCallback` for performance optimizations when necessary. Prefer composition over inheritance for component reuse. Always create a stories file for each component to document its usage and edge cases. Prefer to create a custom hook for complex logic and keep components focused on rendering. All frontend need to respect A11y best practices and use semantic HTML elements. Use ARIA attributes when necessary to improve accessibility. Test components with React Testing Library and Jest to ensure they work as expected and are accessible. all components should be responsive and work well on different screen sizes. Use component libraries like Material-UI or Tailwind CSS to speed up development and maintain a consistent design system. Avoid inline styles; use CSS modules or styled-components for better maintainability. Use absolute imports from `src/` for cleaner code and easier refactoring.
 
 ## Config Inheritance
 
