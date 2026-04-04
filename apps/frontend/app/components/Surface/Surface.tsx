@@ -1,17 +1,17 @@
-import Paper, { type PaperProps } from '@mui/material/Paper';
+import Paper, { type PaperProps } from "@mui/material/Paper";
 
-import { AppText } from '../Text/AppText';
-import { AppTitle } from '../Title/AppTitle';
-import '../component-library.css';
+import { AppText } from "../Text/AppText";
+import { AppTitle } from "../Title/AppTitle";
 
-export type SurfaceAccent = 'primary' | 'secondary' | 'danger' | 'neutral';
 
-export type SurfaceProps = Omit<PaperProps, 'title'> & {
+export type SurfaceAccent = "primary" | "secondary" | "danger" | "neutral";
+
+export type SurfaceProps = Omit<PaperProps, "title"> & {
   accent?: SurfaceAccent;
   actions?: React.ReactNode;
   description?: string;
   eyebrow?: string;
-  padding?: 'normal' | 'dense';
+  padding?: "normal" | "dense";
   title?: string;
 };
 
@@ -19,26 +19,26 @@ export type SurfaceProps = Omit<PaperProps, 'title'> & {
  * Renders a reusable framed container for grouped content.
  */
 export function Surface({
-  accent = 'neutral',
+  accent = "neutral",
   actions,
   children,
   className,
   description,
   eyebrow,
-  padding = 'normal',
+  padding = "normal",
   title,
   ...props
 }: SurfaceProps) {
   return (
     <Paper
       className={[
-        'pm-surface',
+        "pm-surface",
         `pm-surface--${accent}`,
-        padding === 'dense' ? 'pm-surface--dense' : '',
+        padding === "dense" ? "pm-surface--dense" : "",
         className,
       ]
         .filter(Boolean)
-        .join(' ')}
+        .join(" ")}
       {...props}
     >
       {title || description || actions ? (

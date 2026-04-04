@@ -1,8 +1,8 @@
-import Autocomplete from '@mui/material/Autocomplete';
-import CircularProgress from '@mui/material/CircularProgress';
-import TextField from '@mui/material/TextField';
+import Autocomplete from "@mui/material/Autocomplete";
+import CircularProgress from "@mui/material/CircularProgress";
+import TextField from "@mui/material/TextField";
 
-import '../../component-library.css';
+
 
 export type AutocompleteOption = {
   description?: string;
@@ -36,7 +36,7 @@ export function AutocompleteInput({
   helperText,
   label,
   loading = false,
-  noOptionsText = 'No matches found',
+  noOptionsText = "No matches found",
   onChange,
   options,
   placeholder,
@@ -49,7 +49,9 @@ export function AutocompleteInput({
       disabled={disabled}
       fullWidth={fullWidth}
       getOptionLabel={(option) => option.label}
-      isOptionEqualToValue={(option, selectedValue) => option.value === selectedValue.value}
+      isOptionEqualToValue={(option, selectedValue) =>
+        option.value === selectedValue.value
+      }
       loading={loading}
       noOptionsText={noOptionsText}
       options={options}
@@ -66,7 +68,9 @@ export function AutocompleteInput({
               ...params.InputProps,
               endAdornment: (
                 <>
-                  {loading ? <CircularProgress color="inherit" size={18} /> : null}
+                  {loading ? (
+                    <CircularProgress color="inherit" size={18} />
+                  ) : null}
                   {params.InputProps.endAdornment}
                 </>
               ),
@@ -78,13 +82,17 @@ export function AutocompleteInput({
         <li {...renderProps} key={option.value}>
           <div className="pm-autocomplete__option">
             <span>{option.label}</span>
-            {option.description ? <span className="pm-autocomplete__description">{option.description}</span> : null}
+            {option.description ? (
+              <span className="pm-autocomplete__description">
+                {option.description}
+              </span>
+            ) : null}
           </div>
         </li>
       )}
       slotProps={{
         paper: {
-          className: 'pm-autocomplete__paper',
+          className: "pm-autocomplete__paper",
         },
       }}
       value={value}

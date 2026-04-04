@@ -8,18 +8,19 @@ import { Route } from "./+types/home";
 export const meta: Route.MetaFunction = () => {
   return [
     { title: "Project Management Component Library" },
-    { name: "description", content: "MUI-backed hacker-theme component library preview." },
+    {
+      name: "description",
+      content: "MUI-backed hacker-theme component library preview.",
+    },
   ];
-}
+};
 
 /**
  * Home page component.
  * @returns {React.ReactElement} The Welcome component
  */
-const Home: React.FC = () => {
+const Home = () => {
   return <ComponentShowcase />;
-}
+};
 
 export default Home;
-
-

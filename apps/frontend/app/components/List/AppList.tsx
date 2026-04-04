@@ -1,9 +1,9 @@
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 
-import { Surface } from '../Surface/Surface';
-import '../component-library.css';
+import { Surface } from "../Surface/Surface";
+
 
 export type AppListItem = {
   id: string;
@@ -26,7 +26,14 @@ export function AppList({ description, items, title }: AppListProps) {
     <Surface description={description} title={title}>
       <List className="pm-list" disablePadding>
         {items.map((item) => (
-          <ListItem key={item.id} secondaryAction={item.meta ? <span className="pm-list__meta">{item.meta}</span> : null}>
+          <ListItem
+            key={item.id}
+            secondaryAction={
+              item.meta ? (
+                <span className="pm-list__meta">{item.meta}</span>
+              ) : null
+            }
+          >
             <ListItemText primary={item.primary} secondary={item.secondary} />
           </ListItem>
         ))}

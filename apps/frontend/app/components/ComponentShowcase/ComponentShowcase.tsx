@@ -1,83 +1,36 @@
-import Box from '@mui/material/Box';
-import { useState } from 'react';
+import Box from "@mui/material/Box";
+import { useState } from "react";
 
-import { AppButton } from '../Button/AppButton';
-import { DataTable, type DataTableColumn, type DataTableRow } from '../DataTable/DataTable';
-import { AppList } from '../List/AppList';
-import { Surface } from '../Surface/Surface';
-import { AppText } from '../Text/AppText';
-import { AppTitle } from '../Title/AppTitle';
-import { AutocompleteInput, type AutocompleteOption } from '../inputs/AutocompleteInput/AutocompleteInput';
-import { CheckboxField } from '../inputs/CheckboxField/CheckboxField';
-import { DateInput } from '../inputs/DateInput/DateInput';
-import { NumberInput } from '../inputs/NumberInput/NumberInput';
-import { RadioGroupField } from '../inputs/RadioGroupField/RadioGroupField';
-import { TextInput } from '../inputs/TextInput/TextInput';
-
-const teamOptions: AutocompleteOption[] = [
-  { label: 'Platform', value: 'platform', description: 'Infra, auth, and deploy tooling.' },
-  { label: 'Design systems', value: 'design-systems', description: 'Component library and UX patterns.' },
-  { label: 'Growth', value: 'growth', description: 'Acquisition, onboarding, and conversion.' },
-  { label: 'Support ops', value: 'support', description: 'Inbox quality and escalation handling.' },
-];
-
-const activityItems = [
-  {
-    id: 'activity-1',
-    primary: 'Theme tokens established',
-    secondary: 'Dark and light modes now share a single token surface.',
-    meta: '04 Apr',
-  },
-  {
-    id: 'activity-2',
-    primary: 'Storybook stories generated',
-    secondary: 'Each primitive exposes a concrete review surface.',
-    meta: '05 Apr',
-  },
-  {
-    id: 'activity-3',
-    primary: 'Launch table connected',
-    secondary: 'Sorting, row selection, and pagination are active.',
-    meta: '06 Apr',
-  },
-];
-
-const tableColumns: DataTableColumn[] = [
-  { key: 'project', header: 'Project', sortable: true },
-  { key: 'owner', header: 'Owner', sortable: true },
-  {
-    key: 'status',
-    header: 'Status',
-    sortable: true,
-    render: (row: DataTableRow) => {
-      const tone = row.status === 'Blocked' ? 'danger' : row.status === 'Review' ? 'attention' : 'active';
-      return (
-        <span className="pm-table__status" data-tone={tone}>
-          {row.status}
-        </span>
-      );
-    },
-  },
-  { key: 'progress', header: 'Progress', sortable: true, align: 'right', sortAccessor: (row) => Number(row.progress ?? 0) },
-  { key: 'due', header: 'Due', sortable: true, align: 'right' },
-];
-
-const tableRows: DataTableRow[] = [
-  { id: 'row-1', project: 'Frontend library', owner: 'Dana', status: 'Active', progress: 82, due: '2026-04-11' },
-  { id: 'row-2', project: 'Auth hardening', owner: 'Jules', status: 'Review', progress: 61, due: '2026-04-14' },
-  { id: 'row-3', project: 'Mobile sync', owner: 'Ari', status: 'Blocked', progress: 28, due: '2026-04-17' },
-  { id: 'row-4', project: 'Audit trail', owner: 'Nina', status: 'Active', progress: 76, due: '2026-04-21' },
-  { id: 'row-5', project: 'Backlog pruning', owner: 'Milo', status: 'Review', progress: 49, due: '2026-04-22' },
-  { id: 'row-6', project: 'SLA board', owner: 'Sage', status: 'Active', progress: 90, due: '2026-04-23' },
-];
+import { AppButton } from "../Button/AppButton";
+import {
+  DataTable,
+  type DataTableColumn,
+  type DataTableRow,
+} from "../DataTable/DataTable";
+import { AppList } from "../List/AppList";
+import { Surface } from "../Surface/Surface";
+import { AppText } from "../Text/AppText";
+import { AppTitle } from "../Title/AppTitle";
+import {
+  AutocompleteInput,
+  type AutocompleteOption,
+} from "../inputs/AutocompleteInput/AutocompleteInput";
+import { CheckboxField } from "../inputs/CheckboxField/CheckboxField";
+import { DateInput } from "../inputs/DateInput/DateInput";
+import { NumberInput } from "../inputs/NumberInput/NumberInput";
+import { RadioGroupField } from "../inputs/RadioGroupField/RadioGroupField";
+import { TextInput } from "../inputs/TextInput/TextInput";
+import { tableColumns, tableRows, teamOptions } from "./ComponentShowcase.data";
 
 /**
  * Displays a composed library preview used in Storybook and on the home route.
  */
 export function ComponentShowcase() {
-  const [team, setTeam] = useState<AutocompleteOption | null>(teamOptions[1] ?? null);
+  const [team, setTeam] = useState<AutocompleteOption | null>(
+    teamOptions[1] ?? null,
+  );
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const [releaseMode, setReleaseMode] = useState('guarded');
+  const [releaseMode, setReleaseMode] = useState("guarded");
 
   return (
     <div className="pm-showcase">
@@ -90,8 +43,8 @@ export function ComponentShowcase() {
           Frontend command deck
         </AppTitle>
         <AppText tone="muted" variant="body1">
-          The first pass covers form primitives, display primitives, and a data table with sorting,
-          row selection, and pagination.
+          The first pass covers form primitives, display primitives, and a data
+          table with sorting, row selection, and pagination.
         </AppText>
         <div className="pm-showcase__actions">
           <AppButton>Publish build</AppButton>
@@ -101,9 +54,19 @@ export function ComponentShowcase() {
       </Surface>
 
       <Box className="app-grid app-grid--halves">
-        <Surface accent="secondary" description="Compact, readable field styling across the base inputs." eyebrow="Forms" title="Signal entry">
+        <Surface
+          accent="secondary"
+          description="Compact, readable field styling across the base inputs."
+          eyebrow="Forms"
+          title="Signal entry"
+        >
           <div className="app-stack">
-            <TextInput fullWidth helperText="Visible in activity feeds and filters." label="Project title" placeholder="Neon dashboard" />
+            <TextInput
+              fullWidth
+              helperText="Visible in activity feeds and filters."
+              label="Project title"
+              placeholder="Neon dashboard"
+            />
             <Box className="app-grid app-grid--halves">
               <NumberInput
                 fullWidth
@@ -112,7 +75,12 @@ export function ComponentShowcase() {
                 inputProps={{ min: 1, max: 21 }}
                 label="Story points"
               />
-              <DateInput fullWidth defaultValue="2026-04-12" helperText="Target handoff date." label="Launch date" />
+              <DateInput
+                fullWidth
+                defaultValue="2026-04-12"
+                helperText="Target handoff date."
+                label="Launch date"
+              />
             </Box>
             <AutocompleteInput
               fullWidth
@@ -134,14 +102,14 @@ export function ComponentShowcase() {
               name="release-mode"
               options={[
                 {
-                  label: 'Guarded',
-                  value: 'guarded',
-                  description: 'Manual sign-off before environment promotion.',
+                  label: "Guarded",
+                  value: "guarded",
+                  description: "Manual sign-off before environment promotion.",
                 },
                 {
-                  label: 'Fast lane',
-                  value: 'fast',
-                  description: 'Auto-promote once checks complete.',
+                  label: "Fast lane",
+                  value: "fast",
+                  description: "Auto-promote once checks complete.",
                 },
               ]}
               value={releaseMode}
@@ -151,23 +119,38 @@ export function ComponentShowcase() {
         </Surface>
 
         <Box className="app-stack">
-          <Surface accent="primary" description="Type, title, and surface primitives define the visual hierarchy." eyebrow="Display" title="Readable by default">
+          <Surface
+            accent="primary"
+            description="Type, title, and surface primitives define the visual hierarchy."
+            eyebrow="Display"
+            title="Readable by default"
+          >
             <AppText tone="accent" variant="subtitle2">
               focus.visible = true
             </AppText>
             <AppText variant="body1">
-              Strong contrast, monospace accents, and measured glow effects keep the library colorful
-              without hiding the information density you need in a project management app.
+              Strong contrast, monospace accents, and measured glow effects keep
+              the library colorful without hiding the information density you
+              need in a project management app.
             </AppText>
             <AppText mono tone="muted" variant="body2">
-              team: {team?.label ?? 'none'} / notifications: {String(notificationsEnabled)} / mode: {releaseMode}
+              team: {team?.label ?? "none"} / notifications:{" "}
+              {String(notificationsEnabled)} / mode: {releaseMode}
             </AppText>
           </Surface>
-          <AppList description="Useful for activity streams, side panels, and compact summaries." items={activityItems} title="Recent activity" />
+          <AppList
+            description="Useful for activity streams, side panels, and compact summaries."
+            items={activityItems}
+            title="Recent activity"
+          />
         </Box>
       </Box>
 
-      <DataTable columns={tableColumns} rows={tableRows} title="Execution board" />
+      <DataTable
+        columns={tableColumns}
+        rows={tableRows}
+        title="Execution board"
+      />
     </div>
   );
 }

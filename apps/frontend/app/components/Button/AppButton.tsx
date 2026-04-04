@@ -1,20 +1,20 @@
-import Button, { type ButtonProps } from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
+import Button, { type ButtonProps } from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 
-import '../component-library.css';
 
-export type AppButtonTone = 'primary' | 'secondary' | 'ghost' | 'danger';
 
-export type AppButtonProps = Omit<ButtonProps, 'color' | 'variant'> & {
+export type AppButtonTone = "primary" | "secondary" | "ghost" | "danger";
+
+export type AppButtonProps = Omit<ButtonProps, "color" | "variant"> & {
   tone?: AppButtonTone;
   loading?: boolean;
 };
 
-const toneToVariant: Record<AppButtonTone, ButtonProps['variant']> = {
-  primary: 'contained',
-  secondary: 'outlined',
-  ghost: 'text',
-  danger: 'contained',
+const toneToVariant: Record<AppButtonTone, ButtonProps["variant"]> = {
+  primary: "contained",
+  secondary: "outlined",
+  ghost: "text",
+  danger: "contained",
 };
 
 /**
@@ -26,14 +26,18 @@ export function AppButton({
   disabled,
   loading = false,
   startIcon,
-  tone = 'primary',
+  tone = "primary",
   ...props
 }: AppButtonProps) {
   return (
     <Button
-      className={['pm-button', `pm-button--${tone}`, className].filter(Boolean).join(' ')}
+      className={["pm-button", `pm-button--${tone}`, className]
+        .filter(Boolean)
+        .join(" ")}
       disabled={disabled || loading}
-      startIcon={loading ? <CircularProgress color="inherit" size={16} /> : startIcon}
+      startIcon={
+        loading ? <CircularProgress color="inherit" size={16} /> : startIcon
+      }
       variant={toneToVariant[tone]}
       {...props}
     >

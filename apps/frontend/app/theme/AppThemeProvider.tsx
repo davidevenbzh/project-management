@@ -1,7 +1,7 @@
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import { useMemo } from 'react';
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { useMemo } from "react";
 
-import { createAppTheme, type ThemeMode } from './appTheme';
+import { createAppTheme, type ThemeMode } from "./appTheme";
 
 export type AppThemeProviderProps = {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ export type AppThemeProviderProps = {
  */
 export function AppThemeProvider({
   children,
-  mode = 'dark',
+  mode = "dark",
 }: AppThemeProviderProps) {
   const theme = useMemo(() => createAppTheme(mode), [mode]);
 

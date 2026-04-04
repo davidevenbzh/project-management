@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { ComponentShowcase } from './ComponentShowcase';
+import { ComponentShowcase } from "./ComponentShowcase";
 
 const meta = {
-  title: 'Components/Showcase',
+  title: "Components/Showcase",
   component: ComponentShowcase,
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
 } satisfies Meta<typeof ComponentShowcase>;
 

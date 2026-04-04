@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { AppButton } from './AppButton';
+import { AppButton } from "./AppButton";
 
 const meta = {
-  title: 'Components/Button',
+  title: "Components/Button",
   component: AppButton,
   args: {
-    children: 'Deploy node',
-    tone: 'primary',
+    children: "Deploy node",
+    tone: "primary",
   },
 } satisfies Meta<typeof AppButton>;
 
@@ -19,22 +19,22 @@ export const Primary: Story = {};
 
 export const Secondary: Story = {
   args: {
-    tone: 'secondary',
-    children: 'Schedule sync',
+    tone: "secondary",
+    children: "Schedule sync",
   },
 };
 
 export const Ghost: Story = {
   args: {
-    tone: 'ghost',
-    children: 'Open logs',
+    tone: "ghost",
+    children: "Open logs",
   },
 };
 
 export const DangerLoading: Story = {
   args: {
-    tone: 'danger',
-    children: 'Terminate run',
+    tone: "danger",
+    children: "Terminate run",
     loading: true,
   },
 };

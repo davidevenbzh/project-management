@@ -1,10 +1,10 @@
-import Typography, { type TypographyProps } from '@mui/material/Typography';
+import Typography, { type TypographyProps } from "@mui/material/Typography";
 
-import '../component-library.css';
 
-export type AppTextTone = 'default' | 'muted' | 'accent' | 'success' | 'danger';
 
-export type AppTextProps = Omit<TypographyProps, 'color'> & {
+export type AppTextTone = "default" | "muted" | "accent" | "success" | "danger";
+
+export type AppTextProps = Omit<TypographyProps, "color"> & {
   mono?: boolean;
   tone?: AppTextTone;
 };
@@ -12,17 +12,22 @@ export type AppTextProps = Omit<TypographyProps, 'color'> & {
 /**
  * Displays body copy with library tone and typography options.
  */
-export function AppText({ className, mono = false, tone = 'default', ...props }: AppTextProps) {
+export function AppText({
+  className,
+  mono = false,
+  tone = "default",
+  ...props
+}: AppTextProps) {
   return (
     <Typography
       className={[
-        'pm-text',
+        "pm-text",
         `pm-text--${tone}`,
-        mono ? 'pm-text--mono' : '',
+        mono ? "pm-text--mono" : "",
         className,
       ]
         .filter(Boolean)
-        .join(' ')}
+        .join(" ")}
       {...props}
     />
   );

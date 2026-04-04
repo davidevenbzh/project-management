@@ -1,8 +1,11 @@
-import TextField, { type TextFieldProps } from '@mui/material/TextField';
+import TextField, { type TextFieldProps } from "@mui/material/TextField";
 
-import '../../component-library.css';
 
-export type NumberInputProps = Omit<TextFieldProps, 'helperText' | 'type' | 'variant'> & {
+
+export type NumberInputProps = Omit<
+  TextFieldProps,
+  "helperText" | "type" | "variant"
+> & {
   errorText?: React.ReactNode;
   helperText?: React.ReactNode;
 };
@@ -10,13 +13,19 @@ export type NumberInputProps = Omit<TextFieldProps, 'helperText' | 'type' | 'var
 /**
  * Renders a styled number input with the shared field chrome.
  */
-export function NumberInput({ className, error, errorText, helperText, ...props }: NumberInputProps) {
+export function NumberInput({
+  className,
+  error,
+  errorText,
+  helperText,
+  ...props
+}: NumberInputProps) {
   return (
     <TextField
-      className={['pm-field', className].filter(Boolean).join(' ')}
+      className={["pm-field", className].filter(Boolean).join(" ")}
       error={error || Boolean(errorText)}
       helperText={errorText ?? helperText}
-      inputProps={{ inputMode: 'numeric', ...(props.inputProps ?? {}) }}
+      inputProps={{ inputMode: "numeric", ...(props.inputProps ?? {}) }}
       type="number"
       variant="outlined"
       {...props}

@@ -1,11 +1,11 @@
-import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormLabel from '@mui/material/FormLabel';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormLabel from "@mui/material/FormLabel";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
 
-import '../../component-library.css';
+
 
 export type RadioGroupOption = {
   description?: string;
@@ -51,8 +51,14 @@ export function RadioGroupField({
       >
         {options.map((option) => (
           <div className="pm-radio-group__option" key={option.value}>
-            <FormControlLabel control={<Radio />} label={option.label} value={option.value} />
-            {option.description ? <p className="pm-radio-group__hint">{option.description}</p> : null}
+            <FormControlLabel
+              control={<Radio />}
+              label={option.label}
+              value={option.value}
+            />
+            {option.description ? (
+              <p className="pm-radio-group__hint">{option.description}</p>
+            ) : null}
           </div>
         ))}
       </RadioGroup>

@@ -1,20 +1,20 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { TaskCard } from './TaskCard';
+import { TaskCard } from "./TaskCard";
 
 const meta = {
-  title: 'Components/TaskCard',
+  title: "Components/TaskCard",
   component: TaskCard,
   args: {
-    title: 'Design review',
+    title: "Design review",
     description:
-      'Align card spacing, empty states, and drag affordances before wiring the next dashboard iteration.',
-    dueLabel: 'Apr 12',
-    status: 'in-progress',
-    tags: ['ui', 'frontend', 'storybook'],
+      "Align card spacing, empty states, and drag affordances before wiring the next dashboard iteration.",
+    dueLabel: "Apr 12",
+    status: "in-progress",
+    tags: ["ui", "frontend", "storybook"],
   },
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
 } satisfies Meta<typeof TaskCard>;
 
@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Planned: Story = {
   args: {
-    status: 'planned',
+    status: "planned",
   },
 };
 
@@ -32,7 +32,7 @@ export const InProgress: Story = {};
 
 export const Done: Story = {
   args: {
-    status: 'done',
-    dueLabel: 'Apr 04',
+    status: "done",
+    dueLabel: "Apr 04",
   },
 };

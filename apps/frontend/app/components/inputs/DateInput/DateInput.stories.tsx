@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { DateInput } from './DateInput';
+import { DateInput } from "./DateInput";
 
 const meta = {
-  title: 'Components/Inputs/DateInput',
+  title: "Components/Inputs/DateInput",
   component: DateInput,
   args: {
-    label: 'Launch date',
-    helperText: 'Pick the date you intend to ship the next milestone.',
+    label: "Launch date",
+    helperText: "Pick the date you intend to ship the next milestone.",
     fullWidth: true,
-    defaultValue: '2026-04-12',
+    defaultValue: "2026-04-12",
   },
 } satisfies Meta<typeof DateInput>;
 
@@ -21,6 +21,6 @@ export const Default: Story = {};
 
 export const ErrorState: Story = {
   args: {
-    errorText: 'Date must land after the current freeze window.',
+    errorText: "Date must land after the current freeze window.",
   },
 };

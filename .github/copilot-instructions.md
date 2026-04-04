@@ -7,7 +7,7 @@ A Jira/Trello-style project management app built as a portfolio project.
 Turborepo monorepo using **pnpm workspaces**:
 
 'apps' contains application like frontend and backend services;
-'apps/backend-*-service' contains CDK infrastructure deploy on AWS with free serverless architectecture (Lambda, DynamoDB, API Gateway);*
+'apps/backend-_-service' contains CDK infrastructure deploy on AWS with free serverless architectecture (Lambda, DynamoDB, API Gateway);_
 'apps/frontend' is a React SPA using React Router v7 and mui library who can be deployed on AWS S3/CloudFront;
 'packages' contains shared configs and utilities;
 
@@ -44,7 +44,7 @@ For CDK operations, `cd apps/backend-auth-service` then use `pnpm cdk synth|diff
 - **Backend** — use AWS Lambda with API Gateway for serverless functions, DynamoDB for storage. Keep Lambdas focused on a single responsibility and use environment variables for configuration.
 - **Barrels** — avoid index.ts barrels; they can cause circular dependencies and slow down TypeScript compilation. Import directly from source files.
 - **Documentation** — use JSDoc comments for all functions and classes, especially public APIs. Maintain a README.md in each package with usage instructions and examples.
-- **Naming conventions** — use camelCase for variables and functions, PascalCase for classes and React components, and UPPER_SNAKE_CASE for constants. Prefix private fields with an underscore (_).
+- **Naming conventions** — use camelCase for variables and functions, PascalCase for classes and React components, and UPPER*SNAKE_CASE for constants. Prefix private fields with an underscore (*).
 - **React** — use functional components and hooks. Avoid class components. Use `useEffect` for side effects and `useMemo`/`useCallback` for performance optimizations when necessary. Prefer composition over inheritance for component reuse. Always create a stories file for each component to document its usage and edge cases. Prefer to create a custom hook for complex logic and keep components focused on rendering. All frontend need to respect A11y best practices and use semantic HTML elements. Use ARIA attributes when necessary to improve accessibility. Test components with React Testing Library and Jest to ensure they work as expected and are accessible. all components should be responsive and work well on different screen sizes. Use component libraries like Material-UI or Tailwind CSS to speed up development and maintain a consistent design system. Avoid inline styles; use CSS modules or styled-components for better maintainability. Use absolute imports from `src/` for cleaner code and easier refactoring.
 
 ## Config Inheritance
@@ -66,6 +66,7 @@ apps/backend-auth-service/tsconfig.json  ← Extends ../../packages/typescript-c
 **Note:** `tsconfig.json` `extends` uses **relative paths** (TypeScript config resolution), not workspace aliases.
 
 **Example — Frontend:**
+
 ```json
 {
   "extends": "../../packages/typescript-config/react",
@@ -77,6 +78,7 @@ apps/backend-auth-service/tsconfig.json  ← Extends ../../packages/typescript-c
 ```
 
 **Example — Backend (CDK):**
+
 ```json
 {
   "extends": "../../packages/typescript-config/cdk",
@@ -97,14 +99,20 @@ apps/backend-auth-service/eslint.config.js  ← Imports @repo/eslint-config/cdk
 ```
 
 **Example — Frontend:**
+
 ```javascript
 import { config } from "@repo/eslint-config/react-internal";
 import storybook from "eslint-plugin-storybook";
 
-export default [...config, { ignores: [".react-router/**", "./build/**"] }, ...storybook.configs["flat/recommended"]];
+export default [
+  ...config,
+  { ignores: [".react-router/**", "./build/**"] },
+  ...storybook.configs["flat/recommended"],
+];
 ```
 
 **Example — Backend (CDK):**
+
 ```javascript
 import { config } from "@repo/eslint-config/cdk";
 
