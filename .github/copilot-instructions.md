@@ -32,6 +32,8 @@ For CDK operations, `cd apps/backend-auth-service` then use `pnpm cdk synth|diff
 ## Conventions
 
 - **TypeScript strict mode** everywhere — `noUncheckedIndexedAccess: true`, no implicit any.
+- **TypeScript** — use TypeScript for all code, including CDK infrastructure. No JavaScript files, and also use best pratice of TS 5+.
+- **Node** — target Node.js 22+ all code (backend and CDK), use ES2022 features, and module resolution "NodeNext" for better ESM support. Avoid legacy CommonJS patterns.
 - **ESLint flat config** — configs live in `packages/eslint-config/`. All lint violations are warnings (`eslint-plugin-only-warn`); `--max-warnings 0` is enforced in CI/frontend.
 - **Config inheritance** — TypeScript and ESLint configs follow explicit inheritance chains to avoid duplication. See section below.
 - **Shared configs** — extend `@repo/typescript-config` and `@repo/eslint-config` in each app; do not duplicate compiler options.
@@ -43,6 +45,7 @@ For CDK operations, `cd apps/backend-auth-service` then use `pnpm cdk synth|diff
 - **Barrels** — avoid index.ts barrels; they can cause circular dependencies and slow down TypeScript compilation. Import directly from source files.
 - **Documentation** — use JSDoc comments for all functions and classes, especially public APIs. Maintain a README.md in each package with usage instructions and examples.
 - **Naming conventions** — use camelCase for variables and functions, PascalCase for classes and React components, and UPPER_SNAKE_CASE for constants. Prefix private fields with an underscore (_).
+- **React** — use functional components and hooks. Avoid class components. Use `useEffect` for side effects and `useMemo`/`useCallback` for performance optimizations when necessary. Prefer composition over inheritance for component reuse. Always create a stories file for each component to document its usage and edge cases. Prefer to create a custom hook for complex logic and keep components focused on rendering.
 
 ## Config Inheritance
 
