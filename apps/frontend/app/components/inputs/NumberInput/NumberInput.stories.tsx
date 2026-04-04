@@ -6,6 +6,7 @@ import { NumberInput } from "./NumberInput";
 const meta = {
   title: "Components/Inputs/NumberInput",
   component: NumberInput,
+  tags: ["autodocs"],
   args: {
     label: "Story points",
     helperText: "Estimate the effort for the selected task.",
@@ -14,7 +15,6 @@ const meta = {
       min: 1,
       max: 21,
     },
-    tags: ['autodocs'],
     defaultValue: 8,
   },
 } satisfies Meta<typeof NumberInput>;

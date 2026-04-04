@@ -6,12 +6,12 @@ import { RadioGroupField } from "./RadioGroupField";
 const meta = {
   title: "Components/Inputs/RadioGroupField",
   component: RadioGroupField,
+  tags: ["autodocs"],
   args: {
     label: "Release mode",
     name: "release-mode",
     helperText: "Pick the cadence that matches the current sprint objective.",
     defaultValue: "guarded",
-    tags: ['autodocs'],
     options: [
       {
         label: "Guarded",
@@ -38,7 +38,9 @@ export const Default: Story = {
     await expect(radios).toHaveLength(2);
     // Default value "guarded" is selected
     await expect(canvas.getByRole("radio", { name: /guarded/i })).toBeChecked();
-    await expect(canvas.getByRole("radio", { name: /fast lane/i })).not.toBeChecked();
+    await expect(
+      canvas.getByRole("radio", { name: /fast lane/i }),
+    ).not.toBeChecked();
     await expect(canvas.getByText(/pick the cadence/i)).toBeVisible();
   },
 };
