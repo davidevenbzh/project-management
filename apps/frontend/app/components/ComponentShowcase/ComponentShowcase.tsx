@@ -2,11 +2,7 @@ import Box from "@mui/material/Box";
 import { useState } from "react";
 
 import { AppButton } from "../Button/AppButton";
-import {
-  DataTable,
-  type DataTableColumn,
-  type DataTableRow,
-} from "../DataTable/DataTable";
+import { DataTable } from "../DataTable/DataTable";
 import { AppList } from "../List/AppList";
 import { Surface } from "../Surface/Surface";
 import { AppText } from "../Text/AppText";
@@ -20,7 +16,12 @@ import { DateInput } from "../inputs/DateInput/DateInput";
 import { NumberInput } from "../inputs/NumberInput/NumberInput";
 import { RadioGroupField } from "../inputs/RadioGroupField/RadioGroupField";
 import { TextInput } from "../inputs/TextInput/TextInput";
-import { tableColumns, tableRows, teamOptions, activityItems } from "./ComponentShowcase.data";
+import {
+  tableColumns,
+  tableRows,
+  teamOptions,
+  activityItems,
+} from "./ComponentShowcase.data";
 
 /**
  * Displays a composed library preview used in Storybook and on the home route.
