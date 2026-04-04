@@ -33,6 +33,7 @@ For CDK operations, `cd apps/backend-auth-service` then use `pnpm cdk synth|diff
 
 - **TypeScript strict mode** everywhere — `noUncheckedIndexedAccess: true`, no implicit any.
 - **ESLint flat config** — configs live in `packages/eslint-config/`. All lint violations are warnings (`eslint-plugin-only-warn`); `--max-warnings 0` is enforced in CI/frontend.
+- **Config inheritance** — TypeScript and ESLint configs follow explicit inheritance chains to avoid duplication. See section below.
 - **Shared configs** — extend `@repo/typescript-config` and `@repo/eslint-config` in each app; do not duplicate compiler options.
 - **Turbo task graph** — `build` depends on `^build` (dependencies first). Don't add long-running tasks to `build`; use `dev` with `cache: false, persistent: true`.
 - **Package manager** — use `pnpm` only; do not generate `package-lock.json` or `yarn.lock`.
@@ -42,3 +43,81 @@ For CDK operations, `cd apps/backend-auth-service` then use `pnpm cdk synth|diff
 - **Barrels** — avoid index.ts barrels; they can cause circular dependencies and slow down TypeScript compilation. Import directly from source files.
 - **Documentation** — use JSDoc comments for all functions and classes, especially public APIs. Maintain a README.md in each package with usage instructions and examples.
 - **Naming conventions** — use camelCase for variables and functions, PascalCase for classes and React components, and UPPER_SNAKE_CASE for constants. Prefix private fields with an underscore (_).
+
+## Config Inheritance
+
+Config files follow explicit inheritance chains in `packages/` to maintain DRY principles and ensure consistency across apps.
+
+### TypeScript Configs
+
+```
+packages/typescript-config/
+├── base.json          ← Universal settings (strict mode, ES2022, module resolution)
+├── react.json         ← Extends base.json, adds Vite/React Router settings
+└── cdk.json           ← Extends base.json, adds CDK-specific decorators & sourcemaps
+
+apps/frontend/tsconfig.json       ← Extends ../../packages/typescript-config/react
+apps/backend-auth-service/tsconfig.json  ← Extends ../../packages/typescript-config/cdk
+```
+
+**Note:** `tsconfig.json` `extends` uses **relative paths** (TypeScript config resolution), not workspace aliases.
+
+**Example — Frontend:**
+```json
+{
+  "extends": "../../packages/typescript-config/react",
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "types": ["node", "vite/client"]
+  }
+}
+```
+
+**Example — Backend (CDK):**
+```json
+{
+  "extends": "../../packages/typescript-config/cdk",
+  "exclude": ["node_modules", "cdk.out"]
+}
+```
+
+### ESLint Configs
+
+```
+packages/eslint-config/
+├── base.js            ← Universal rules (JS, TypeScript, Prettier, Turbo)
+├── react-internal.js  ← Extends base.js, adds React & React Hooks rules
+└── cdk.js             ← Extends base.js, adds Node.js config
+
+apps/frontend/eslint.config.js          ← Imports @repo/eslint-config/react-internal
+apps/backend-auth-service/eslint.config.js  ← Imports @repo/eslint-config/cdk
+```
+
+**Example — Frontend:**
+```javascript
+import { config } from "@repo/eslint-config/react-internal";
+import storybook from "eslint-plugin-storybook";
+
+export default [...config, { ignores: [".react-router/**", "./build/**"] }, ...storybook.configs["flat/recommended"]];
+```
+
+**Example — Backend (CDK):**
+```javascript
+import { config } from "@repo/eslint-config/cdk";
+
+export default [...config];
+```
+
+### Adding a New App
+
+When adding a new app, follow these patterns:
+
+1. **TypeScript**: Choose the appropriate base config:
+   - React SPA → extend `../../packages/typescript-config/react` (relative path)
+   - Node.js/Lambda/CDK → extend `../../packages/typescript-config/cdk` (relative path)
+   - Library package → extend `../../packages/typescript-config/base` (relative path)
+
+2. **ESLint**: Import the appropriate config (uses `@repo/` workspace alias):
+   - React app → import from `@repo/eslint-config/react-internal`
+   - Node.js/CDK → import from `@repo/eslint-config/cdk`
+   - Minimal setup → import from `@repo/eslint-config` (base config)

@@ -27,6 +27,12 @@ importers:
         specifier: ^10.5.0
         version: 10.6.0
     devDependencies:
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
       '@types/jest':
         specifier: ^30
         version: 30.0.0
@@ -36,6 +42,9 @@ importers:
       aws-cdk:
         specifier: 2.1117.0
         version: 2.1117.0
+      eslint:
+        specifier: ^9.39.1
+        version: 9.39.1(jiti@2.6.1)
       jest:
         specifier: ^30
         version: 30.3.0(@types/node@24.12.2)(ts-node@10.9.2(@types/node@24.12.2)(typescript@5.9.3))
