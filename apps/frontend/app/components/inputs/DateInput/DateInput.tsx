@@ -1,11 +1,6 @@
 import TextField, { type TextFieldProps } from "@mui/material/TextField";
 
-
-
-export type DateInputProps = Omit<
-  TextFieldProps,
-  "helperText" | "type" | "variant"
-> & {
+export type DateInputProps = Omit<TextFieldProps, "helperText" | "type" | "variant"> & {
   errorText?: React.ReactNode;
   helperText?: React.ReactNode;
 };
@@ -18,17 +13,27 @@ export function DateInput({
   error,
   errorText,
   helperText,
+  slotProps,
   ...props
 }: DateInputProps) {
+  const inputLabelSlotProps =
+    slotProps?.inputLabel && typeof slotProps.inputLabel === "object" ? slotProps.inputLabel : {};
+
   return (
     <TextField
-      InputLabelProps={{ shrink: true }}
+      {...props}
       className={["pm-field", className].filter(Boolean).join(" ")}
       error={error || Boolean(errorText)}
       helperText={errorText ?? helperText}
+      slotProps={{
+        ...slotProps,
+        inputLabel: {
+          ...inputLabelSlotProps,
+          shrink: true,
+        },
+      }}
       type="date"
       variant="outlined"
-      {...props}
     />
   );
 }

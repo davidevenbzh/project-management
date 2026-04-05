@@ -1,35 +1,25 @@
-import Box from "@mui/material/Box";
 import { useState } from "react";
+import Box from "@mui/material/Box";
 
 import { AppButton } from "../Button/AppButton";
 import { DataTable } from "../DataTable/DataTable";
-import { AppList } from "../List/AppList";
-import { Surface } from "../Surface/Surface";
-import { AppText } from "../Text/AppText";
-import { AppTitle } from "../Title/AppTitle";
-import {
-  AutocompleteInput,
-  type AutocompleteOption,
-} from "../inputs/AutocompleteInput/AutocompleteInput";
+import { AutocompleteInput } from "../inputs/AutocompleteInput/AutocompleteInput";
 import { CheckboxField } from "../inputs/CheckboxField/CheckboxField";
 import { DateInput } from "../inputs/DateInput/DateInput";
 import { NumberInput } from "../inputs/NumberInput/NumberInput";
 import { RadioGroupField } from "../inputs/RadioGroupField/RadioGroupField";
 import { TextInput } from "../inputs/TextInput/TextInput";
-import {
-  tableColumns,
-  tableRows,
-  teamOptions,
-  activityItems,
-} from "./ComponentShowcase.data";
+import { AppList } from "../List/AppList";
+import { Surface } from "../Surface/Surface";
+import { AppText } from "../Text/AppText";
+import { AppTitle } from "../Title/AppTitle";
+import { activityItems, tableColumns, tableRows, teamOptions } from "./ComponentShowcase.data";
 
 /**
  * Displays a composed library preview used in Storybook and on the home route.
  */
 export function ComponentShowcase() {
-  const [team, setTeam] = useState<AutocompleteOption | null>(
-    teamOptions[1] ?? null,
-  );
+  const [team, setTeam] = useState(teamOptions[1] ?? null);
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [releaseMode, setReleaseMode] = useState("guarded");
 
@@ -44,8 +34,8 @@ export function ComponentShowcase() {
           Frontend command deck
         </AppTitle>
         <AppText tone="muted" variant="body1">
-          The first pass covers form primitives, display primitives, and a data
-          table with sorting, row selection, and pagination.
+          The first pass covers form primitives, display primitives, and a data table with sorting,
+          row selection, and pagination.
         </AppText>
         <div className="pm-showcase__actions">
           <AppButton>Publish build</AppButton>
@@ -73,7 +63,7 @@ export function ComponentShowcase() {
                 fullWidth
                 defaultValue={8}
                 helperText="Estimate remaining work."
-                inputProps={{ min: 1, max: 21 }}
+                htmlInputProps={{ max: 21, min: 1 }}
                 label="Story points"
               />
               <DateInput
@@ -130,13 +120,12 @@ export function ComponentShowcase() {
               focus.visible = true
             </AppText>
             <AppText variant="body1">
-              Strong contrast, monospace accents, and measured glow effects keep
-              the library colorful without hiding the information density you
-              need in a project management app.
+              Strong contrast, monospace accents, and measured glow effects keep the library
+              colorful without hiding the information density you need in a project management app.
             </AppText>
             <AppText mono tone="muted" variant="body2">
-              team: {team?.label ?? "none"} / notifications:{" "}
-              {String(notificationsEnabled)} / mode: {releaseMode}
+              team: {team?.label ?? "none"} / notifications: {String(notificationsEnabled)} / mode:{" "}
+              {releaseMode}
             </AppText>
           </Surface>
           <AppList
@@ -147,11 +136,7 @@ export function ComponentShowcase() {
         </Box>
       </Box>
 
-      <DataTable
-        columns={tableColumns}
-        rows={tableRows}
-        title="Execution board"
-      />
+      <DataTable columns={tableColumns} rows={tableRows} title="Execution board" />
     </div>
   );
 }

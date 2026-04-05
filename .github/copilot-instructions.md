@@ -17,7 +17,6 @@ Turborepo monorepo using **pnpm workspaces**:
 # From repo root
 pnpm dev           # Run frontend app in development mode (respects Turbo task graph)
 pnpm build         # Production build (respects Turbo task graph)
-pnpm lint          # ESLint across all packages
 pnpm check-types   # tsc --noEmit across all packages
 pnpm format        # Prettier on **/*.{ts,tsx,md}
 pnpm deploy        # Deploy CDK stacks in dependency order (respects Turbo task graph)
@@ -34,9 +33,8 @@ For CDK operations, `cd apps/backend-auth-service` then use `pnpm cdk synth|diff
 - **TypeScript strict mode** everywhere — `noUncheckedIndexedAccess: true`, no implicit any.
 - **TypeScript** — use TypeScript for all code, including CDK infrastructure. No JavaScript files, and also use best pratice of TS 5+.
 - **Node** — target Node.js 22+ all code (backend and CDK), use ES2022 features, and module resolution "NodeNext" for better ESM support. Avoid legacy CommonJS patterns. Prefer `import`/`export` syntax and top-level await where appropriate. Prefer arrow functions and modern JS features for cleaner code.
-- **ESLint flat config** — configs live in `packages/eslint-config/`. All lint violations are warnings (`eslint-plugin-only-warn`); `--max-warnings 0` is enforced in CI/frontend.
-- **Config inheritance** — TypeScript and ESLint configs follow explicit inheritance chains to avoid duplication. See section below.
-- **Shared configs** — extend `@repo/typescript-config` and `@repo/eslint-config` in each app; do not duplicate compiler options.
+- **Config inheritance** — TypeScript configs follow explicit inheritance chains to avoid duplication. See section below.
+- **Shared configs** — extend `@repo/typescript-config` in each app; do not duplicate compiler options.
 - **Turbo task graph** — `build` depends on `^build` (dependencies first). Don't add long-running tasks to `build`; use `dev` with `cache: false, persistent: true`.
 - **Package manager** — use `pnpm` only; do not generate `package-lock.json` or `yarn.lock`.
 - **CDK best practices** — use constructs, avoid hardcoding ARNs, use environment variables for config, write tests for critical infrastructure.
@@ -49,7 +47,7 @@ For CDK operations, `cd apps/backend-auth-service` then use `pnpm cdk synth|diff
 
 ## Config Inheritance
 
-Config files follow explicit inheritance chains in `packages/` to maintain DRY principles and ensure consistency across apps.
+TypeScript config files follow explicit inheritance chains in `packages/` to maintain DRY principles and ensure consistency across apps.
 
 ### TypeScript Configs
 
@@ -86,39 +84,6 @@ apps/backend-auth-service/tsconfig.json  ← Extends ../../packages/typescript-c
 }
 ```
 
-### ESLint Configs
-
-```
-packages/eslint-config/
-├── base.js            ← Universal rules (JS, TypeScript, Prettier, Turbo)
-├── react-internal.js  ← Extends base.js, adds React & React Hooks rules
-└── cdk.js             ← Extends base.js, adds Node.js config
-
-apps/frontend/eslint.config.js          ← Imports @repo/eslint-config/react-internal
-apps/backend-auth-service/eslint.config.js  ← Imports @repo/eslint-config/cdk
-```
-
-**Example — Frontend:**
-
-```javascript
-import { config } from "@repo/eslint-config/react-internal";
-import storybook from "eslint-plugin-storybook";
-
-export default [
-  ...config,
-  { ignores: [".react-router/**", "./build/**"] },
-  ...storybook.configs["flat/recommended"],
-];
-```
-
-**Example — Backend (CDK):**
-
-```javascript
-import { config } from "@repo/eslint-config/cdk";
-
-export default [...config];
-```
-
 ### Adding a New App
 
 When adding a new app, follow these patterns:
@@ -127,8 +92,3 @@ When adding a new app, follow these patterns:
    - React SPA → extend `../../packages/typescript-config/react` (relative path)
    - Node.js/Lambda/CDK → extend `../../packages/typescript-config/cdk` (relative path)
    - Library package → extend `../../packages/typescript-config/base` (relative path)
-
-2. **ESLint**: Import the appropriate config (uses `@repo/` workspace alias):
-   - React app → import from `@repo/eslint-config/react-internal`
-   - Node.js/CDK → import from `@repo/eslint-config/cdk`
-   - Minimal setup → import from `@repo/eslint-config` (base config)

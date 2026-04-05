@@ -1,5 +1,5 @@
-import type { AutocompleteOption } from "../inputs/AutocompleteInput/AutocompleteInput";
 import type { DataTableColumn, DataTableRow } from "../DataTable/DataTable";
+import type { AutocompleteOption } from "../inputs/AutocompleteInput/AutocompleteInput";
 
 export const teamOptions: AutocompleteOption[] = [
   {
@@ -54,11 +54,7 @@ export const tableColumns: DataTableColumn[] = [
     sortable: true,
     render: (row: DataTableRow) => {
       const tone =
-        row.status === "Blocked"
-          ? "danger"
-          : row.status === "Review"
-            ? "attention"
-            : "active";
+        row.status === "Blocked" ? "danger" : row.status === "Review" ? "attention" : "active";
       return (
         <span className="pm-table__status" data-tone={tone}>
           {row.status}

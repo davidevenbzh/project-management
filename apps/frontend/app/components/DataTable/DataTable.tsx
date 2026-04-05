@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import LinearProgress from "@mui/material/LinearProgress";
 import Table from "@mui/material/Table";
@@ -8,11 +9,9 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import { useMemo, useState } from "react";
 
-import { AppText } from "../Text/AppText";
 import { Surface } from "../Surface/Surface";
-
+import { AppText } from "../Text/AppText";
 
 export type DataTableCellValue = React.ReactNode;
 
@@ -41,10 +40,15 @@ export type DataTableProps = {
   title?: string;
 };
 
-const compareValues = (
-  leftValue: string | number,
-  rightValue: string | number,
-) => {
+const getComparableValue = (value: DataTableCellValue): string | number => {
+  if (typeof value === "number" || typeof value === "string") {
+    return value;
+  }
+
+  return "";
+};
+
+const compareValues = (leftValue: string | number, rightValue: string | number) => {
   if (typeof leftValue === "number" && typeof rightValue === "number") {
     return leftValue - rightValue;
   }
@@ -66,13 +70,11 @@ export function DataTable({
 }: DataTableProps) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(initialRowsPerPage);
-  const [sortKey, setSortKey] = useState<string | null>(
-    columns.find((column) => column.sortable)?.key ?? null,
-  );
+  const [sortKey, setSortKey] = useState(columns.find((column) => column.sortable)?.key ?? null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-  const sortedRows = useMemo(() => {
+  const sortedRows = useMemo<DataTableRow[]>(() => {
     if (!sortKey) {
       return rows;
     }
@@ -83,19 +85,9 @@ export function DataTable({
     }
 
     return [...rows].sort((leftRow, rightRow) => {
-      const leftValue =
-        activeColumn.sortAccessor?.(leftRow) ?? leftRow[sortKey];
-      const rightValue =
-        activeColumn.sortAccessor?.(rightRow) ?? rightRow[sortKey];
-      const normalizedLeft =
-        typeof leftValue === "number" || typeof leftValue === "string"
-          ? leftValue
-          : String(leftValue ?? "");
-      const normalizedRight =
-        typeof rightValue === "number" || typeof rightValue === "string"
-          ? rightValue
-          : String(rightValue ?? "");
-      const result = compareValues(normalizedLeft, normalizedRight);
+      const leftValue = activeColumn.sortAccessor?.(leftRow) ?? leftRow[sortKey];
+      const rightValue = activeColumn.sortAccessor?.(rightRow) ?? rightRow[sortKey];
+      const result = compareValues(getComparableValue(leftValue), getComparableValue(rightValue));
 
       return sortDirection === "asc" ? result : -result;
     });
@@ -107,11 +99,8 @@ export function DataTable({
   }, [page, rowsPerPage, sortedRows]);
 
   const allVisibleSelected =
-    visibleRows.length > 0 &&
-    visibleRows.every((row) => selectedIds.includes(row.id));
-  const hasVisibleSelection = visibleRows.some((row) =>
-    selectedIds.includes(row.id),
-  );
+    visibleRows.length > 0 && visibleRows.every((row) => selectedIds.includes(row.id));
+  const hasVisibleSelection = visibleRows.some((row) => selectedIds.includes(row.id));
 
   const toggleSelection = (rowId: string) => {
     setSelectedIds((currentSelection) =>
@@ -127,9 +116,7 @@ export function DataTable({
     }
 
     if (sortKey === column.key) {
-      setSortDirection((currentDirection) =>
-        currentDirection === "asc" ? "desc" : "asc",
-      );
+      setSortDirection((currentDirection) => (currentDirection === "asc" ? "desc" : "asc"));
       return;
     }
 
@@ -147,8 +134,8 @@ export function DataTable({
       <div className="pm-table__toolbar">
         <AppText tone="muted" variant="body2">
           {selectedIds.length > 0
-            ? `${selectedIds.length} row(s) selected`
-            : `${rows.length} total row(s)`}
+            ? `${String(selectedIds.length)} row(s) selected`
+            : `${String(rows.length)} total row(s)`}
         </AppText>
         <span className="pm-table__meta">
           active sort: {sortKey ?? "none"} / {sortDirection}
@@ -169,30 +156,24 @@ export function DataTable({
                       setSelectedIds((currentSelection) => {
                         const visibleIds = visibleRows.map((row) => row.id);
                         if (!nextValue) {
-                          return currentSelection.filter(
-                            (id) => !visibleIds.includes(id),
-                          );
+                          return currentSelection.filter((id) => !visibleIds.includes(id));
                         }
 
-                        return Array.from(
-                          new Set([...currentSelection, ...visibleIds]),
-                        );
+                        return Array.from(new Set([...currentSelection, ...visibleIds]));
                       });
                     }}
                   />
                 </TableCell>
               ) : null}
               {columns.map((column) => (
-                <TableCell
-                  align={column.align}
-                  key={column.key}
-                  style={{ width: column.width }}
-                >
+                <TableCell align={column.align} key={column.key} style={{ width: column.width }}>
                   {column.sortable ? (
                     <TableSortLabel
                       active={sortKey === column.key}
                       direction={sortKey === column.key ? sortDirection : "asc"}
-                      onClick={() => toggleSort(column)}
+                      onClick={() => {
+                        toggleSort(column);
+                      }}
                     >
                       {column.header}
                     </TableSortLabel>
@@ -206,10 +187,7 @@ export function DataTable({
           <TableBody>
             {!loading && visibleRows.length === 0 ? (
               <TableRow>
-                <TableCell
-                  align="center"
-                  colSpan={columns.length + (selectable ? 1 : 0)}
-                >
+                <TableCell align="center" colSpan={columns.length + (selectable ? 1 : 0)}>
                   <AppText tone="muted">{emptyMessage}</AppText>
                 </TableCell>
               </TableRow>
@@ -223,7 +201,9 @@ export function DataTable({
                     <TableCell padding="checkbox">
                       <Checkbox
                         checked={selected}
-                        onChange={() => toggleSelection(row.id)}
+                        onChange={() => {
+                          toggleSelection(row.id);
+                        }}
                       />
                     </TableCell>
                   ) : null}
@@ -244,7 +224,9 @@ export function DataTable({
         page={page}
         rowsPerPage={rowsPerPage}
         rowsPerPageOptions={[5, 10, 25]}
-        onPageChange={(_, nextPage) => setPage(nextPage)}
+        onPageChange={(_, nextPage) => {
+          setPage(nextPage);
+        }}
         onRowsPerPageChange={(event) => {
           setRowsPerPage(Number(event.target.value));
           setPage(0);

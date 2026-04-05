@@ -38,9 +38,7 @@ export const Default: Story = {
     await expect(radios).toHaveLength(2);
     // Default value "guarded" is selected
     await expect(canvas.getByRole("radio", { name: /guarded/i })).toBeChecked();
-    await expect(
-      canvas.getByRole("radio", { name: /fast lane/i }),
-    ).not.toBeChecked();
+    await expect(canvas.getByRole("radio", { name: /fast lane/i })).not.toBeChecked();
     await expect(canvas.getByText(/pick the cadence/i)).toBeVisible();
   },
 };

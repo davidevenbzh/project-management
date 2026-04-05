@@ -6,10 +6,9 @@ import { AppText } from "./AppText";
 const meta = {
   title: "Components/Text",
   component: AppText,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
-    children:
-      "Track execution, review state changes, and keep each interaction legible.",
+    children: "Track execution, review state changes, and keep each interaction legible.",
     variant: "body1",
   },
 } satisfies Meta<typeof AppText>;
@@ -21,9 +20,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(
-      canvas.getByText(/track execution/i),
-    ).toBeVisible();
+    await expect(canvas.getByText(/track execution/i)).toBeVisible();
   },
 };
 

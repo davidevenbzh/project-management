@@ -27,7 +27,7 @@ For every review, assess the following areas and report findings grouped by seve
 
 - **Frontend**: Components should be small and reusable. Routes registered in `app/routes.ts`. Absolute imports from `src/`. No barrel `index.ts` files.
 - **Backend (CDK)**: Use L2 constructs where possible. No hardcoded ARNs. Use environment variables for config. Each Lambda must have a single responsibility.
-- **Monorepo**: Apps extend `@repo/typescript-config` and `@repo/eslint-config` — no duplicate compiler options. No `package-lock.json` or `yarn.lock`.
+- **Monorepo**: Apps extend `@repo/typescript-config` where appropriate — no duplicate compiler options. No `package-lock.json` or `yarn.lock`.
 - **Turbo**: Long-running tasks must not be in `build`; they belong in `dev` with `cache: false, persistent: true`.
 
 ### TypeScript

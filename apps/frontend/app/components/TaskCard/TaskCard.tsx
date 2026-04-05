@@ -13,13 +13,7 @@ export type TaskCardProps = {
 /**
  * Displays a simple project task summary for Storybook-driven component work.
  */
-export function TaskCard({
-  title,
-  description,
-  dueLabel,
-  status,
-  tags = [],
-}: TaskCardProps) {
+export function TaskCard({ title, description, dueLabel, status, tags = [] }: TaskCardProps) {
   return (
     <article className="task-card" data-status={status}>
       <header className="task-card__header">

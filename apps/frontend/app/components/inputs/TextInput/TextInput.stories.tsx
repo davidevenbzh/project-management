@@ -12,7 +12,7 @@ const meta = {
     helperText: "Use a short, recognizable identifier.",
     fullWidth: true,
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 } satisfies Meta<typeof TextInput>;
 
 export default meta;

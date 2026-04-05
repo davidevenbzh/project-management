@@ -12,7 +12,7 @@ const meta = {
     fullWidth: true,
     defaultValue: "2026-04-12",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 } satisfies Meta<typeof DateInput>;
 
 export default meta;
@@ -23,8 +23,12 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     // MUI date input renders with an implicit textbox role
-    const input = canvasElement.querySelector("input[type='date']") as HTMLInputElement;
-    await expect(input).not.toBeNull();
+    const input = canvasElement.querySelector("input[type='date']");
+
+    if (!(input instanceof HTMLInputElement)) {
+      throw new Error("Expected a date input element to be rendered.");
+    }
+
     await expect(input).toBeVisible();
     await expect(input).toHaveValue("2026-04-12");
     await expect(canvas.getByText(/pick the date/i)).toBeVisible();
@@ -38,7 +42,12 @@ export const ErrorState: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText(/date must land after/i)).toBeVisible();
-    const input = canvasElement.querySelector("input[type='date']") as HTMLInputElement;
+    const input = canvasElement.querySelector("input[type='date']");
+
+    if (!(input instanceof HTMLInputElement)) {
+      throw new Error("Expected a date input element to be rendered.");
+    }
+
     await expect(input).toHaveAttribute("aria-invalid", "true");
   },
 };

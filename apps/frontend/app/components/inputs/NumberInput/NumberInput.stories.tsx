@@ -11,7 +11,7 @@ const meta = {
     label: "Story points",
     helperText: "Estimate the effort for the selected task.",
     fullWidth: true,
-    inputProps: {
+    htmlInputProps: {
       min: 1,
       max: 21,
     },

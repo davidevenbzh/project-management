@@ -1,6 +1,7 @@
 import "../app/app.css";
-import type { Preview } from "@storybook/react-vite";
+
 import React from "react";
+import type { Preview } from "@storybook/react-vite";
 
 import { AppThemeProvider } from "../app/theme/AppThemeProvider";
 

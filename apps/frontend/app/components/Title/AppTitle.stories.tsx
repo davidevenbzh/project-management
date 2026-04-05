@@ -6,12 +6,11 @@ import { AppTitle } from "./AppTitle";
 const meta = {
   title: "Components/Title",
   component: AppTitle,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
     kicker: "Control layer",
     children: "Command center",
-    subtitle:
-      "A clear entry point for actions, alerts, and operational context.",
+    subtitle: "A clear entry point for actions, alerts, and operational context.",
   },
 } satisfies Meta<typeof AppTitle>;
 
@@ -23,9 +22,7 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText(/control layer/i)).toBeVisible();
-    await expect(
-      canvas.getByRole("heading", { name: /command center/i }),
-    ).toBeVisible();
+    await expect(canvas.getByRole("heading", { name: /command center/i })).toBeVisible();
     await expect(canvas.getByText(/clear entry point/i)).toBeVisible();
   },
 };

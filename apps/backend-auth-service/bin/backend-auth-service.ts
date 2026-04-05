@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import * as cdk from "aws-cdk-lib/core";
-import { BackendAuthServiceStack } from "../lib/backend-auth-service-stack";
+
+import { BackendAuthServiceStack } from "../lib/backend-auth-service-stack.js";
 
 const app = new cdk.App();
 new BackendAuthServiceStack(app, "BackendAuthServiceStack", {

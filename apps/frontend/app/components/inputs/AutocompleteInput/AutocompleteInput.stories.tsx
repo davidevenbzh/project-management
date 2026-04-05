@@ -29,7 +29,7 @@ const options = [
 const meta = {
   title: "Components/Inputs/AutocompleteInput",
   component: AutocompleteInput,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
     label: "Assign team",
     helperText: "Search a local option set or show an async loading state.",

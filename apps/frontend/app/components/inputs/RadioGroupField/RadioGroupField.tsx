@@ -5,8 +5,6 @@ import FormLabel from "@mui/material/FormLabel";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 
-
-
 export type RadioGroupOption = {
   description?: string;
   label: string;
@@ -51,11 +49,7 @@ export function RadioGroupField({
       >
         {options.map((option) => (
           <div className="pm-radio-group__option" key={option.value}>
-            <FormControlLabel
-              control={<Radio />}
-              label={option.label}
-              value={option.value}
-            />
+            <FormControlLabel control={<Radio />} label={option.label} value={option.value} />
             {option.description ? (
               <p className="pm-radio-group__hint">{option.description}</p>
             ) : null}

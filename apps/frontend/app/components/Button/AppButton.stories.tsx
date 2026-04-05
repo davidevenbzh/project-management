@@ -10,7 +10,7 @@ const meta = {
     children: "Deploy node",
     tone: "primary",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 } satisfies Meta<typeof AppButton>;
 
 export default meta;

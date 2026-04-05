@@ -1,7 +1,5 @@
 import Typography, { type TypographyProps } from "@mui/material/Typography";
 
-
-
 export type AppTitleProps = {
   align?: TypographyProps["align"];
   children: React.ReactNode;
@@ -29,11 +27,7 @@ export function AppTitle({
         {children}
       </Typography>
       {subtitle ? (
-        <Typography
-          align={align}
-          className="pm-title__subtitle"
-          variant="body1"
-        >
+        <Typography align={align} className="pm-title__subtitle" variant="body1">
           {subtitle}
         </Typography>
       ) : null}

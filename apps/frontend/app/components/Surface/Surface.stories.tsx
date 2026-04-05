@@ -8,17 +8,16 @@ import { Surface } from "./Surface";
 const meta = {
   title: "Components/Surface",
   component: Surface,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
     accent: "primary",
     eyebrow: "Overview",
     title: "Release window",
-    description:
-      "Track deployment readiness, blockers, and operator actions in one place.",
+    description: "Track deployment readiness, blockers, and operator actions in one place.",
     children: (
       <AppText variant="body1">
-        The surface component gives the rest of the library a consistent frame
-        with enough contrast for dense content.
+        The surface component gives the rest of the library a consistent frame with enough contrast
+        for dense content.
       </AppText>
     ),
   },
@@ -32,9 +31,7 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText(/overview/i)).toBeVisible();
-    await expect(
-      canvas.getByRole("heading", { name: /release window/i }),
-    ).toBeVisible();
+    await expect(canvas.getByRole("heading", { name: /release window/i })).toBeVisible();
     await expect(canvas.getByText(/track deployment readiness/i)).toBeVisible();
   },
 };
@@ -45,8 +42,6 @@ export const WithActions: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(
-      canvas.getByRole("button", { name: /inspect queue/i }),
-    ).toBeVisible();
+    await expect(canvas.getByRole("button", { name: /inspect queue/i })).toBeVisible();
   },
 };

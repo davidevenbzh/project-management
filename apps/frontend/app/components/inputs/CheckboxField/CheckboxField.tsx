@@ -3,8 +3,6 @@ import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 
-
-
 export type CheckboxFieldProps = {
   checked?: boolean;
   defaultChecked?: boolean;

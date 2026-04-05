@@ -1,8 +1,6 @@
 import Button, { type ButtonProps } from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 
-
-
 export type AppButtonTone = "primary" | "secondary" | "ghost" | "danger";
 
 export type AppButtonProps = Omit<ButtonProps, "color" | "variant"> & {
@@ -31,13 +29,9 @@ export function AppButton({
 }: AppButtonProps) {
   return (
     <Button
-      className={["pm-button", `pm-button--${tone}`, className]
-        .filter(Boolean)
-        .join(" ")}
+      className={["pm-button", `pm-button--${tone}`, className].filter(Boolean).join(" ")}
       disabled={disabled || loading}
-      startIcon={
-        loading ? <CircularProgress color="inherit" size={16} /> : startIcon
-      }
+      startIcon={loading ? <CircularProgress color="inherit" size={16} /> : startIcon}
       variant={toneToVariant[tone]}
       {...props}
     >

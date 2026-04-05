@@ -11,7 +11,7 @@ const meta = {
     description: "Send updates to watchers across the current workspace.",
     defaultChecked: true,
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 } satisfies Meta<typeof CheckboxField>;
 
 export default meta;

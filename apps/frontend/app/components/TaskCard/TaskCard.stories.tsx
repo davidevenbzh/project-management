@@ -6,7 +6,7 @@ import { TaskCard } from "./TaskCard";
 const meta = {
   title: "Components/TaskCard",
   component: TaskCard,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
     title: "Design review",
     description:

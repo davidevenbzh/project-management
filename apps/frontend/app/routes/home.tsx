@@ -1,5 +1,5 @@
 import { ComponentShowcase } from "../components/ComponentShowcase/ComponentShowcase";
-import { Route } from "./+types/home";
+import type { Route } from "./+types/home";
 
 /**
  * Generates metadata for the home page route.

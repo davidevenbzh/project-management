@@ -4,7 +4,6 @@ import ListItemText from "@mui/material/ListItemText";
 
 import { Surface } from "../Surface/Surface";
 
-
 export type AppListItem = {
   id: string;
   meta?: React.ReactNode;
@@ -28,11 +27,7 @@ export function AppList({ description, items, title }: AppListProps) {
         {items.map((item) => (
           <ListItem
             key={item.id}
-            secondaryAction={
-              item.meta ? (
-                <span className="pm-list__meta">{item.meta}</span>
-              ) : null
-            }
+            secondaryAction={item.meta ? <span className="pm-list__meta">{item.meta}</span> : null}
           >
             <ListItemText primary={item.primary} secondary={item.secondary} />
           </ListItem>

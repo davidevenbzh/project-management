@@ -1,27 +1,26 @@
 {
   "name": "backend-auth-service",
+  "type": "module",
   "version": "0.1.0",
+  "main": "./dist/bin/backend-auth-service.js",
   "bin": {
-    "backend-auth-service": "bin/backend-auth-service.js"
+    "backend-auth-service": "./dist/bin/backend-auth-service.js"
   },
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
-    "check-types": "tsc --noEmit",
-    "lint": "eslint --max-warnings 0",
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc -w -p tsconfig.json",
+    "check-types": "tsc --noEmit -p tsconfig.json",
     "test": "jest",
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/jest": "^30",
     "@types/node": "^24.10.1",
-    "eslint": "^9.39.1",
     "jest": "^30",
     "ts-jest": "^29",
+    "tsx": "^4.20.6",
     "aws-cdk": "2.1117.0",
-    "ts-node": "^10.9.2",
     "typescript": "~5.9.3"
   },
   "dependencies": {

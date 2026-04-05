@@ -3,7 +3,6 @@ import Paper, { type PaperProps } from "@mui/material/Paper";
 import { AppText } from "../Text/AppText";
 import { AppTitle } from "../Title/AppTitle";
 
-
 export type SurfaceAccent = "primary" | "secondary" | "danger" | "neutral";
 
 export type SurfaceProps = Omit<PaperProps, "title"> & {

@@ -6,17 +6,15 @@ import { AppList } from "./AppList";
 const meta = {
   title: "Components/List",
   component: AppList,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
     title: "Recent events",
-    description:
-      "A short activity feed with clear primary and supporting content.",
+    description: "A short activity feed with clear primary and supporting content.",
     items: [
       {
         id: "1",
         primary: "Schema review approved",
-        secondary:
-          "Backend auth service is ready for the next environment promotion.",
+        secondary: "Backend auth service is ready for the next environment promotion.",
         meta: "02m ago",
       },
       {

@@ -57,7 +57,7 @@ const rows: DataTableRow[] = [
 const meta = {
   title: "Components/DataTable",
   component: DataTable,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
     title: "Project monitor",
     columns: [
@@ -69,11 +69,7 @@ const meta = {
         sortable: true,
         render: (row: DataTableRow) => {
           const tone =
-            row.status === "Blocked"
-              ? "danger"
-              : row.status === "Review"
-                ? "attention"
-                : "active";
+            row.status === "Blocked" ? "danger" : row.status === "Review" ? "attention" : "active";
           return (
             <span className="pm-table__status" data-tone={tone}>
               {row.status}
