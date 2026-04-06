@@ -1,0 +1,9 @@
+node_modules
+.turbo
+dist
+coverage
+apps/frontend/build
+apps/frontend/storybook-static
+apps/frontend/.react-router
+apps/backend-auth-service/cdk.out
+apps/backend-auth-service/dist

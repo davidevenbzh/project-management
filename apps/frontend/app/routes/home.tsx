@@ -1,5 +1,5 @@
-import { Welcome } from "../welcome/welcome";
-import { Route } from "./+types/home";
+import { ComponentShowcase } from "../components/ComponentShowcase/ComponentShowcase";
+import type { Route } from "./+types/home";
 
 /**
  * Generates metadata for the home page route.
@@ -7,19 +7,20 @@ import { Route } from "./+types/home";
  */
 export const meta: Route.MetaFunction = () => {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Project Management Component Library" },
+    {
+      name: "description",
+      content: "MUI-backed hacker-theme component library preview.",
+    },
   ];
-}
+};
 
 /**
  * Home page component.
  * @returns {React.ReactElement} The Welcome component
  */
-const Home: React.FC = () => {
-  return <Welcome />;
-}
+const Home = () => {
+  return <ComponentShowcase />;
+};
 
 export default Home;
-
-

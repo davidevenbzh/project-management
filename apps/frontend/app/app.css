@@ -1,1 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap");
+@import "./components/component-library.css";
 
+:root {
+  font-family: Inter, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.theme-root {
+  position: relative;
+  min-height: 100vh;
+  color: var(--app-text-primary);
+  background:
+    radial-gradient(circle at top left, var(--app-glow-primary), transparent 28%),
+    radial-gradient(circle at top right, var(--app-glow-secondary), transparent 22%),
+    linear-gradient(180deg, var(--app-background-elevated), var(--app-background));
+  overflow-x: hidden;
+}
+
+.theme-root::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(transparent 0%, rgba(255, 255, 255, 0.025) 50%, transparent 100%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size:
+    auto,
+    48px 48px,
+    48px 48px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85), transparent 92%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.theme-root > * {
+  position: relative;
+  z-index: 1;
+}
+
+.theme-root[data-theme="dark"] {
+  --app-background: #050816;
+  --app-background-elevated: #0a1126;
+  --app-surface: rgba(10, 18, 38, 0.86);
+  --app-surface-raised: rgba(16, 27, 54, 0.92);
+  --app-border: rgba(62, 92, 163, 0.45);
+  --app-border-strong: rgba(0, 245, 160, 0.38);
+  --app-text-primary: #f3f7ff;
+  --app-text-muted: #91a5d7;
+  --app-primary: #00f5a0;
+  --app-primary-strong: #00c27d;
+  --app-secondary: #38bdf8;
+  --app-danger: #ff5c8a;
+  --app-warning: #ffb347;
+  --app-shadow: 0 28px 60px rgba(0, 0, 0, 0.35);
+  --app-glow-primary: rgba(0, 245, 160, 0.18);
+  --app-glow-secondary: rgba(56, 189, 248, 0.14);
+}
+
+.theme-root[data-theme="light"] {
+  --app-background: #f3f7ff;
+  --app-background-elevated: #dbeafe;
+  --app-surface: rgba(255, 255, 255, 0.9);
+  --app-surface-raised: rgba(241, 245, 255, 0.96);
+  --app-border: rgba(59, 130, 246, 0.24);
+  --app-border-strong: rgba(37, 99, 235, 0.42);
+  --app-text-primary: #11203f;
+  --app-text-muted: #5c6f96;
+  --app-primary: #2563eb;
+  --app-primary-strong: #1d4ed8;
+  --app-secondary: #ef4444;
+  --app-danger: #dc2626;
+  --app-warning: #f97316;
+  --app-shadow: 0 26px 55px rgba(37, 99, 235, 0.12);
+  --app-glow-primary: rgba(37, 99, 235, 0.18);
+  --app-glow-secondary: rgba(239, 68, 68, 0.16);
+}
+
+.app-shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.app-page {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.storybook-shell {
+  min-height: 100vh;
+}
+
+.storybook-frame {
+  width: min(1200px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.app-code {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+}
+
+.app-kicker {
+  margin: 0;
+  color: var(--app-primary);
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.app-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.app-grid--halves {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.app-grid--thirds {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.app-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.app-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.app-muted {
+  color: var(--app-text-muted);
+}
+
+@keyframes appPulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(0, 245, 160, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 28px rgba(0, 245, 160, 0.22);
+  }
+}
+
+@media (max-width: 720px) {
+  .app-shell,
+  .storybook-frame {
+    width: min(100%, calc(100% - 1.25rem));
+    padding-top: 1.25rem;
+  }
+}

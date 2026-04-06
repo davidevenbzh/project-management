@@ -7,19 +7,23 @@
   border-radius: 1rem;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 249, 252, 0.94)),
-    radial-gradient(circle at top right, color-mix(in srgb, var(--task-card-accent) 12%, transparent), transparent 48%);
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--task-card-accent) 12%, transparent),
+      transparent 48%
+    );
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
 }
 
-.task-card[data-status='planned'] {
+.task-card[data-status="planned"] {
   --task-card-accent: #0ea5e9;
 }
 
-.task-card[data-status='in-progress'] {
+.task-card[data-status="in-progress"] {
   --task-card-accent: #f97316;
 }
 
-.task-card[data-status='done'] {
+.task-card[data-status="done"] {
   --task-card-accent: #22c55e;
 }
 

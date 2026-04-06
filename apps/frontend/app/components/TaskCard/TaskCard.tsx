@@ -1,6 +1,6 @@
-import './TaskCard.css';
+import "./TaskCard.css";
 
-export type TaskCardStatus = 'planned' | 'in-progress' | 'done';
+export type TaskCardStatus = "planned" | "in-progress" | "done";
 
 export type TaskCardProps = {
   title: string;
@@ -13,13 +13,7 @@ export type TaskCardProps = {
 /**
  * Displays a simple project task summary for Storybook-driven component work.
  */
-export function TaskCard({
-  title,
-  description,
-  dueLabel,
-  status,
-  tags = [],
-}: TaskCardProps) {
+export function TaskCard({ title, description, dueLabel, status, tags = [] }: TaskCardProps) {
   return (
     <article className="task-card" data-status={status}>
       <header className="task-card__header">
@@ -27,7 +21,7 @@ export function TaskCard({
           <h2 className="task-card__title">{title}</h2>
           <p className="task-card__meta">Due {dueLabel}</p>
         </div>
-        <span className="task-card__status">{status.replace('-', ' ')}</span>
+        <span className="task-card__status">{status.replace("-", " ")}</span>
       </header>
 
       <p className="task-card__body">{description}</p>
