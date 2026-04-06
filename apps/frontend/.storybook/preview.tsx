@@ -22,23 +22,16 @@ const preview: Preview = {
   decorators: [
     (Story, context) => {
       const mode = context.globals.themeMode === "light" ? "light" : "dark";
-
-      return React.createElement(
-        "div",
-        { className: "storybook-shell" },
-        React.createElement(
-          "div",
-          { className: "theme-root", "data-theme": mode },
-          React.createElement(
-            AppThemeProvider,
-            { mode },
-            React.createElement(
-              "div",
-              { className: "storybook-frame" },
-              React.createElement(Story),
-            ),
-          ),
-        ),
+      return (
+        <div className="storybook-shell">
+          <div className="theme-root data-theme">
+            <AppThemeProvider mode={mode}>
+              <div className="storybook-frame">
+                <Story />
+              </div>
+            </AppThemeProvider>
+          </div>
+        </div>
       );
     },
   ],
