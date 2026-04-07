@@ -1,11 +1,11 @@
-import { ComponentShowcase } from "../components/ComponentShowcase/ComponentShowcase";
-
 /**
- * Home page component.
- * @returns {React.ReactElement} The component showcase view.
+ * Homepage route declaration.
+ * @returns {React.ReactElement} The login page route element.
  */
+import { LoginPage } from "../pages/LoginPage/LoginPage";
+
 const Home = () => {
-  return <ComponentShowcase />;
+  return <LoginPage />;
 };
 
 export default Home;

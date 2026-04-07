@@ -15,6 +15,10 @@ const config: StorybookConfig = {
       directory: "../app/components",
       files: "**/*.stories.@(js|jsx|mjs|ts|tsx)",
     },
+    {
+      directory: "../app/pages",
+      files: "**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    },
   ],
   addons: [
     getAbsolutePath("@chromatic-com/storybook"),

@@ -1,6 +1,6 @@
 import TextField, { type TextFieldProps } from "@mui/material/TextField";
 
-export type TextInputProps = Omit<TextFieldProps, "helperText" | "type" | "variant"> & {
+export type TextInputProps = Omit<TextFieldProps, "helperText" | "variant"> & {
   errorText?: React.ReactNode;
   helperText?: React.ReactNode;
 };
@@ -14,7 +14,7 @@ export function TextInput({ className, error, errorText, helperText, ...props }:
       className={["pm-field", className].filter(Boolean).join(" ")}
       error={error || Boolean(errorText)}
       helperText={errorText ?? helperText}
-      type="text"
+      type={props.type ?? "text"}
       variant="outlined"
       {...props}
     />
